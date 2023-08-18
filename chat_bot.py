@@ -14,7 +14,7 @@ from streamlit_chat import message
 
 load_dotenv('.env')
 
-from compibot.constants import BOTO3, COMPANY_NAME, PERSIST_DIRECTORY_BOTO3_DB, PERSIST_DIRECTORY_COMPANY_DB
+from constants import BOTO3, COMPANY_NAME, PERSIST_DIRECTORY_BOTO3_DB, PERSIST_DIRECTORY_COMPANY_DB
 
 
 def create_agent():

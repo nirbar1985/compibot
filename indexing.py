@@ -6,7 +6,7 @@ from langchain.embeddings import OpenAIEmbeddings
 from langchain.text_splitter import CharacterTextSplitter
 from langchain.vectorstores import Chroma
 
-from compibot.constants import PERSIST_DIRECTORY_BOTO3_DB, PERSIST_DIRECTORY_COMPANY_DB, SOURCE_DIRECTORY_BOTO3_DOCS, \
+from constants import PERSIST_DIRECTORY_BOTO3_DB, PERSIST_DIRECTORY_COMPANY_DB, SOURCE_DIRECTORY_BOTO3_DOCS, \
     SOURCE_DIRECTORY_COMPANY_DOCS
 
 load_dotenv('.env')
