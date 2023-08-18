@@ -1,0 +1,150 @@
+create_trust_anchor
+create_trust_anchor(**kwargs)
+Creates a trust anchor. You establish trust between IAM Roles Anywhere and your certificate authority (CA) by configuring a trust anchor. A Trust Anchor is defined either as a reference to a AWS Certificate Manager Private Certificate Authority (ACM PCA), or by uploading a Certificate Authority (CA) certificate. Your AWS workloads can authenticate with the trust anchor using certificates issued by the trusted Certificate Authority (CA) in exchange for temporary AWS credentials.
+
+Required permissions: rolesanywhere:CreateTrustAnchor .
+See also: AWS API Documentation
+
+Request Syntax
+
+response = client.create_trust_anchor(
+    enabled=True|False,
+    name='string',
+    source={
+        'sourceData': {
+            'acmPcaArn': 'string',
+            'x509CertificateData': 'string'
+        },
+        'sourceType': 'AWS_ACM_PCA'|'CERTIFICATE_BUNDLE'|'SELF_SIGNED_REPOSITORY'
+    },
+    tags=[
+        {
+            'key': 'string',
+            'value': 'string'
+        },
+    ]
+)
+Parameters
+enabled (boolean) -- Specifies whether the trust anchor is enabled.
+name (string) --
+[REQUIRED]
+
+The name of the trust anchor.
+
+source (dict) --
+[REQUIRED]
+
+The trust anchor type and its related certificate data.
+
+sourceData (dict) --
+The data field of the trust anchor depending on its type.
+
+Note
+
+This is a Tagged Union structure. Only one of the following top level keys can be set: acmPcaArn, x509CertificateData.
+
+acmPcaArn (string) --
+The root certificate of the Certificate Manager Private Certificate Authority specified by this ARN is used in trust validation for CreateSession operations. Included for trust anchors of type AWS_ACM_PCA .
+
+x509CertificateData (string) --
+The PEM-encoded data for the certificate anchor. Included for trust anchors of type CERTIFICATE_BUNDLE .
+
+sourceType (string) --
+The type of the trust anchor.
+
+tags (list) --
+The tags to attach to the trust anchor.
+
+(dict) --
+A label that consists of a key and value you define.
+
+key (string) -- [REQUIRED]
+The tag key.
+
+value (string) -- [REQUIRED]
+The tag value.
+
+Return type
+dict
+
+Returns
+Response Syntax
+
+{
+    'trustAnchor': {
+        'createdAt': datetime(2015, 1, 1),
+        'enabled': True|False,
+        'name': 'string',
+        'source': {
+            'sourceData': {
+                'acmPcaArn': 'string',
+                'x509CertificateData': 'string'
+            },
+            'sourceType': 'AWS_ACM_PCA'|'CERTIFICATE_BUNDLE'|'SELF_SIGNED_REPOSITORY'
+        },
+        'trustAnchorArn': 'string',
+        'trustAnchorId': 'string',
+        'updatedAt': datetime(2015, 1, 1)
+    }
+}
+Response Structure
+
+(dict) --
+
+trustAnchor (dict) --
+
+The state of the trust anchor after a read or write operation.
+
+createdAt (datetime) --
+
+The ISO-8601 timestamp when the trust anchor was created.
+
+enabled (boolean) --
+
+Indicates whether the trust anchor is enabled.
+
+name (string) --
+
+The name of the trust anchor.
+
+source (dict) --
+
+The trust anchor type and its related certificate data.
+
+sourceData (dict) --
+
+The data field of the trust anchor depending on its type.
+
+Note
+
+This is a Tagged Union structure. Only one of the following top level keys will be set: acmPcaArn, x509CertificateData. If a client receives an unknown member it will set SDK_UNKNOWN_MEMBER as the top level key, which maps to the name or tag of the unknown member. The structure of SDK_UNKNOWN_MEMBER is as follows:
+
+'SDK_UNKNOWN_MEMBER': {'name': 'UnknownMemberName'}
+acmPcaArn (string) --
+
+The root certificate of the Certificate Manager Private Certificate Authority specified by this ARN is used in trust validation for CreateSession operations. Included for trust anchors of type AWS_ACM_PCA .
+
+x509CertificateData (string) --
+
+The PEM-encoded data for the certificate anchor. Included for trust anchors of type CERTIFICATE_BUNDLE .
+
+sourceType (string) --
+
+The type of the trust anchor.
+
+trustAnchorArn (string) --
+
+The ARN of the trust anchor.
+
+trustAnchorId (string) --
+
+The unique identifier of the trust anchor.
+
+updatedAt (datetime) --
+
+The ISO-8601 timestamp when the trust anchor was last updated.
+
+Exceptions
+
+IAMRolesAnywhere.Client.exceptions.ValidationException
+IAMRolesAnywhere.Client.exceptions.AccessDeniedException

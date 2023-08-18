@@ -1,0 +1,620 @@
+ACMPCA / Client / issue_certificate
+
+issue_certificate
+ACMPCA.Client.issue_certificate(**kwargs)
+Uses your private certificate authority (CA), or one that has been shared with you, to issue a client certificate. This action returns the Amazon Resource Name (ARN) of the certificate. You can retrieve the certificate by calling the GetCertificate action and specifying the ARN.
+
+Note
+You cannot use the ACM ListCertificateAuthorities action to retrieve the ARNs of the certificates that you issue by using Amazon Web Services Private CA.
+
+See also: AWS API Documentation
+
+Request Syntax
+response = client.issue_certificate(
+    ApiPassthrough={
+        'Extensions': {
+            'CertificatePolicies': [
+                {
+                    'CertPolicyId': 'string',
+                    'PolicyQualifiers': [
+                        {
+                            'PolicyQualifierId': 'CPS',
+                            'Qualifier': {
+                                'CpsUri': 'string'
+                            }
+                        },
+                    ]
+                },
+            ],
+            'ExtendedKeyUsage': [
+                {
+                    'ExtendedKeyUsageType': 'SERVER_AUTH'|'CLIENT_AUTH'|'CODE_SIGNING'|'EMAIL_PROTECTION'|'TIME_STAMPING'|'OCSP_SIGNING'|'SMART_CARD_LOGIN'|'DOCUMENT_SIGNING'|'CERTIFICATE_TRANSPARENCY',
+                    'ExtendedKeyUsageObjectIdentifier': 'string'
+                },
+            ],
+            'KeyUsage': {
+                'DigitalSignature': True|False,
+                'NonRepudiation': True|False,
+                'KeyEncipherment': True|False,
+                'DataEncipherment': True|False,
+                'KeyAgreement': True|False,
+                'KeyCertSign': True|False,
+                'CRLSign': True|False,
+                'EncipherOnly': True|False,
+                'DecipherOnly': True|False
+            },
+            'SubjectAlternativeNames': [
+                {
+                    'OtherName': {
+                        'TypeId': 'string',
+                        'Value': 'string'
+                    },
+                    'Rfc822Name': 'string',
+                    'DnsName': 'string',
+                    'DirectoryName': {
+                        'Country': 'string',
+                        'Organization': 'string',
+                        'OrganizationalUnit': 'string',
+                        'DistinguishedNameQualifier': 'string',
+                        'State': 'string',
+                        'CommonName': 'string',
+                        'SerialNumber': 'string',
+                        'Locality': 'string',
+                        'Title': 'string',
+                        'Surname': 'string',
+                        'GivenName': 'string',
+                        'Initials': 'string',
+                        'Pseudonym': 'string',
+                        'GenerationQualifier': 'string',
+                        'CustomAttributes': [
+                            {
+                                'ObjectIdentifier': 'string',
+                                'Value': 'string'
+                            },
+                        ]
+                    },
+                    'EdiPartyName': {
+                        'PartyName': 'string',
+                        'NameAssigner': 'string'
+                    },
+                    'UniformResourceIdentifier': 'string',
+                    'IpAddress': 'string',
+                    'RegisteredId': 'string'
+                },
+            ],
+            'CustomExtensions': [
+                {
+                    'ObjectIdentifier': 'string',
+                    'Value': 'string',
+                    'Critical': True|False
+                },
+            ]
+        },
+        'Subject': {
+            'Country': 'string',
+            'Organization': 'string',
+            'OrganizationalUnit': 'string',
+            'DistinguishedNameQualifier': 'string',
+            'State': 'string',
+            'CommonName': 'string',
+            'SerialNumber': 'string',
+            'Locality': 'string',
+            'Title': 'string',
+            'Surname': 'string',
+            'GivenName': 'string',
+            'Initials': 'string',
+            'Pseudonym': 'string',
+            'GenerationQualifier': 'string',
+            'CustomAttributes': [
+                {
+                    'ObjectIdentifier': 'string',
+                    'Value': 'string'
+                },
+            ]
+        }
+    },
+    CertificateAuthorityArn='string',
+    Csr=b'bytes',
+    SigningAlgorithm='SHA256WITHECDSA'|'SHA384WITHECDSA'|'SHA512WITHECDSA'|'SHA256WITHRSA'|'SHA384WITHRSA'|'SHA512WITHRSA',
+    TemplateArn='string',
+    Validity={
+        'Value': 123,
+        'Type': 'END_DATE'|'ABSOLUTE'|'DAYS'|'MONTHS'|'YEARS'
+    },
+    ValidityNotBefore={
+        'Value': 123,
+        'Type': 'END_DATE'|'ABSOLUTE'|'DAYS'|'MONTHS'|'YEARS'
+    },
+    IdempotencyToken='string'
+)
+PARAMETERS:
+ApiPassthrough (dict) –
+
+Specifies X.509 certificate information to be included in the issued certificate. An APIPassthrough or APICSRPassthrough template variant must be selected, or else this parameter is ignored. For more information about using these templates, see Understanding Certificate Templates.
+
+If conflicting or duplicate certificate information is supplied during certificate issuance, Amazon Web Services Private CA applies order of operation rules to determine what information is used.
+
+Extensions (dict) –
+
+Specifies X.509 extension information for a certificate.
+
+CertificatePolicies (list) –
+
+Contains a sequence of one or more policy information terms, each of which consists of an object identifier (OID) and optional qualifiers. For more information, see NIST’s definition of Object Identifier (OID).
+
+In an end-entity certificate, these terms indicate the policy under which the certificate was issued and the purposes for which it may be used. In a CA certificate, these terms limit the set of policies for certification paths that include this certificate.
+
+(dict) –
+
+Defines the X.509 CertificatePolicies extension.
+
+CertPolicyId (string) – [REQUIRED]
+
+Specifies the object identifier (OID) of the certificate policy under which the certificate was issued. For more information, see NIST’s definition of Object Identifier (OID).
+
+PolicyQualifiers (list) –
+
+Modifies the given CertPolicyId with a qualifier. Amazon Web Services Private CA supports the certification practice statement (CPS) qualifier.
+
+(dict) –
+
+Modifies the CertPolicyId of a PolicyInformation object with a qualifier. Amazon Web Services Private CA supports the certification practice statement (CPS) qualifier.
+
+PolicyQualifierId (string) – [REQUIRED]
+
+Identifies the qualifier modifying a CertPolicyId.
+
+Qualifier (dict) – [REQUIRED]
+
+Defines the qualifier type. Amazon Web Services Private CA supports the use of a URI for a CPS qualifier in this field.
+
+CpsUri (string) – [REQUIRED]
+
+Contains a pointer to a certification practice statement (CPS) published by the CA.
+
+ExtendedKeyUsage (list) –
+
+Specifies additional purposes for which the certified public key may be used other than basic purposes indicated in the KeyUsage extension.
+
+(dict) –
+
+Specifies additional purposes for which the certified public key may be used other than basic purposes indicated in the KeyUsage extension.
+
+ExtendedKeyUsageType (string) –
+
+Specifies a standard ExtendedKeyUsage as defined as in RFC 5280.
+
+ExtendedKeyUsageObjectIdentifier (string) –
+
+Specifies a custom ExtendedKeyUsage with an object identifier (OID).
+
+KeyUsage (dict) –
+
+Defines one or more purposes for which the key contained in the certificate can be used. Default value for each option is false.
+
+DigitalSignature (boolean) –
+
+Key can be used for digital signing.
+
+NonRepudiation (boolean) –
+
+Key can be used for non-repudiation.
+
+KeyEncipherment (boolean) –
+
+Key can be used to encipher data.
+
+DataEncipherment (boolean) –
+
+Key can be used to decipher data.
+
+KeyAgreement (boolean) –
+
+Key can be used in a key-agreement protocol.
+
+KeyCertSign (boolean) –
+
+Key can be used to sign certificates.
+
+CRLSign (boolean) –
+
+Key can be used to sign CRLs.
+
+EncipherOnly (boolean) –
+
+Key can be used only to encipher data.
+
+DecipherOnly (boolean) –
+
+Key can be used only to decipher data.
+
+SubjectAlternativeNames (list) –
+
+The subject alternative name extension allows identities to be bound to the subject of the certificate. These identities may be included in addition to or in place of the identity in the subject field of the certificate.
+
+(dict) –
+
+Describes an ASN.1 X.400 GeneralName as defined in RFC 5280. Only one of the following naming options should be provided. Providing more than one option results in an InvalidArgsException error.
+
+OtherName (dict) –
+
+Represents GeneralName using an OtherName object.
+
+TypeId (string) – [REQUIRED]
+
+Specifies an OID.
+
+Value (string) – [REQUIRED]
+
+Specifies an OID value.
+
+Rfc822Name (string) –
+
+Represents GeneralName as an RFC 822 email address.
+
+DnsName (string) –
+
+Represents GeneralName as a DNS name.
+
+DirectoryName (dict) –
+
+Contains information about the certificate subject. The Subject field in the certificate identifies the entity that owns or controls the public key in the certificate. The entity can be a user, computer, device, or service. The ``Subject ``must contain an X.500 distinguished name (DN). A DN is a sequence of relative distinguished names (RDNs). The RDNs are separated by commas in the certificate.
+
+Country (string) –
+
+Two-digit code that specifies the country in which the certificate subject located.
+
+Organization (string) –
+
+Legal name of the organization with which the certificate subject is affiliated.
+
+OrganizationalUnit (string) –
+
+A subdivision or unit of the organization (such as sales or finance) with which the certificate subject is affiliated.
+
+DistinguishedNameQualifier (string) –
+
+Disambiguating information for the certificate subject.
+
+State (string) –
+
+State in which the subject of the certificate is located.
+
+CommonName (string) –
+
+For CA and end-entity certificates in a private PKI, the common name (CN) can be any string within the length limit.
+
+Note: In publicly trusted certificates, the common name must be a fully qualified domain name (FQDN) associated with the certificate subject.
+
+SerialNumber (string) –
+
+The certificate serial number.
+
+Locality (string) –
+
+The locality (such as a city or town) in which the certificate subject is located.
+
+Title (string) –
+
+A title such as Mr. or Ms., which is pre-pended to the name to refer formally to the certificate subject.
+
+Surname (string) –
+
+Family name. In the US and the UK, for example, the surname of an individual is ordered last. In Asian cultures the surname is typically ordered first.
+
+GivenName (string) –
+
+First name.
+
+Initials (string) –
+
+Concatenation that typically contains the first letter of the GivenName, the first letter of the middle name if one exists, and the first letter of the Surname.
+
+Pseudonym (string) –
+
+Typically a shortened version of a longer GivenName. For example, Jonathan is often shortened to John. Elizabeth is often shortened to Beth, Liz, or Eliza.
+
+GenerationQualifier (string) –
+
+Typically a qualifier appended to the name of an individual. Examples include Jr. for junior, Sr. for senior, and III for third.
+
+CustomAttributes (list) –
+
+Contains a sequence of one or more X.500 relative distinguished names (RDNs), each of which consists of an object identifier (OID) and a value. For more information, see NIST’s definition of Object Identifier (OID).
+
+Note
+Custom attributes cannot be used in combination with standard attributes.
+
+(dict) –
+
+Defines the X.500 relative distinguished name (RDN).
+
+ObjectIdentifier (string) – [REQUIRED]
+
+Specifies the object identifier (OID) of the attribute type of the relative distinguished name (RDN).
+
+Value (string) – [REQUIRED]
+
+Specifies the attribute value of relative distinguished name (RDN).
+
+EdiPartyName (dict) –
+
+Represents GeneralName as an EdiPartyName object.
+
+PartyName (string) – [REQUIRED]
+
+Specifies the party name.
+
+NameAssigner (string) –
+
+Specifies the name assigner.
+
+UniformResourceIdentifier (string) –
+
+Represents GeneralName as a URI.
+
+IpAddress (string) –
+
+Represents GeneralName as an IPv4 or IPv6 address.
+
+RegisteredId (string) –
+
+Represents GeneralName as an object identifier (OID).
+
+CustomExtensions (list) –
+
+Contains a sequence of one or more X.509 extensions, each of which consists of an object identifier (OID), a base64-encoded value, and the critical flag. For more information, see the Global OID reference database.
+
+(dict) –
+
+Specifies the X.509 extension information for a certificate.
+
+Extensions present in CustomExtensions follow the ApiPassthrough template rules.
+
+ObjectIdentifier (string) – [REQUIRED]
+
+Specifies the object identifier (OID) of the X.509 extension. For more information, see the Global OID reference database.
+
+Value (string) – [REQUIRED]
+
+Specifies the base64-encoded value of the X.509 extension.
+
+Critical (boolean) –
+
+Specifies the critical flag of the X.509 extension.
+
+Subject (dict) –
+
+Contains information about the certificate subject. The Subject field in the certificate identifies the entity that owns or controls the public key in the certificate. The entity can be a user, computer, device, or service. The ``Subject ``must contain an X.500 distinguished name (DN). A DN is a sequence of relative distinguished names (RDNs). The RDNs are separated by commas in the certificate.
+
+Country (string) –
+
+Two-digit code that specifies the country in which the certificate subject located.
+
+Organization (string) –
+
+Legal name of the organization with which the certificate subject is affiliated.
+
+OrganizationalUnit (string) –
+
+A subdivision or unit of the organization (such as sales or finance) with which the certificate subject is affiliated.
+
+DistinguishedNameQualifier (string) –
+
+Disambiguating information for the certificate subject.
+
+State (string) –
+
+State in which the subject of the certificate is located.
+
+CommonName (string) –
+
+For CA and end-entity certificates in a private PKI, the common name (CN) can be any string within the length limit.
+
+Note: In publicly trusted certificates, the common name must be a fully qualified domain name (FQDN) associated with the certificate subject.
+
+SerialNumber (string) –
+
+The certificate serial number.
+
+Locality (string) –
+
+The locality (such as a city or town) in which the certificate subject is located.
+
+Title (string) –
+
+A title such as Mr. or Ms., which is pre-pended to the name to refer formally to the certificate subject.
+
+Surname (string) –
+
+Family name. In the US and the UK, for example, the surname of an individual is ordered last. In Asian cultures the surname is typically ordered first.
+
+GivenName (string) –
+
+First name.
+
+Initials (string) –
+
+Concatenation that typically contains the first letter of the GivenName, the first letter of the middle name if one exists, and the first letter of the Surname.
+
+Pseudonym (string) –
+
+Typically a shortened version of a longer GivenName. For example, Jonathan is often shortened to John. Elizabeth is often shortened to Beth, Liz, or Eliza.
+
+GenerationQualifier (string) –
+
+Typically a qualifier appended to the name of an individual. Examples include Jr. for junior, Sr. for senior, and III for third.
+
+CustomAttributes (list) –
+
+Contains a sequence of one or more X.500 relative distinguished names (RDNs), each of which consists of an object identifier (OID) and a value. For more information, see NIST’s definition of Object Identifier (OID).
+
+Note
+Custom attributes cannot be used in combination with standard attributes.
+
+(dict) –
+
+Defines the X.500 relative distinguished name (RDN).
+
+ObjectIdentifier (string) – [REQUIRED]
+
+Specifies the object identifier (OID) of the attribute type of the relative distinguished name (RDN).
+
+Value (string) – [REQUIRED]
+
+Specifies the attribute value of relative distinguished name (RDN).
+
+CertificateAuthorityArn (string) –
+
+[REQUIRED]
+
+The Amazon Resource Name (ARN) that was returned when you called CreateCertificateAuthority. This must be of the form:
+
+arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
+
+Csr (bytes) –
+
+[REQUIRED]
+
+The certificate signing request (CSR) for the certificate you want to issue. As an example, you can use the following OpenSSL command to create the CSR and a 2048 bit RSA private key.
+
+openssl req -new -newkey rsa:2048 -days 365 -keyout private/test_cert_priv_key.pem -out csr/test_cert_.csr
+
+If you have a configuration file, you can then use the following OpenSSL command. The usr_cert block in the configuration file contains your X509 version 3 extensions.
+
+openssl req -new -config openssl_rsa.cnf -extensions usr_cert -newkey rsa:2048 -days 365 -keyout private/test_cert_priv_key.pem -out csr/test_cert_.csr
+
+Note: A CSR must provide either a subject name or a subject alternative name or the request will be rejected.
+
+SigningAlgorithm (string) –
+
+[REQUIRED]
+
+The name of the algorithm that will be used to sign the certificate to be issued.
+
+This parameter should not be confused with the SigningAlgorithm parameter used to sign a CSR in the CreateCertificateAuthority action.
+
+Note
+The specified signing algorithm family (RSA or ECDSA) must match the algorithm family of the CA’s secret key.
+
+TemplateArn (string) –
+
+Specifies a custom configuration template to use when issuing a certificate. If this parameter is not provided, Amazon Web Services Private CA defaults to the EndEntityCertificate/V1 template. For CA certificates, you should choose the shortest path length that meets your needs. The path length is indicated by the PathLen*N* portion of the ARN, where N is the CA depth.
+
+Note: The CA depth configured on a subordinate CA certificate must not exceed the limit set by its parents in the CA hierarchy.
+
+For a list of TemplateArn values supported by Amazon Web Services Private CA, see Understanding Certificate Templates.
+
+Validity (dict) –
+
+[REQUIRED]
+
+Information describing the end of the validity period of the certificate. This parameter sets the “Not After” date for the certificate.
+
+Certificate validity is the period of time during which a certificate is valid. Validity can be expressed as an explicit date and time when the certificate expires, or as a span of time after issuance, stated in days, months, or years. For more information, see Validity in RFC 5280.
+
+This value is unaffected when ValidityNotBefore is also specified. For example, if Validity is set to 20 days in the future, the certificate will expire 20 days from issuance time regardless of the ValidityNotBefore value.
+
+The end of the validity period configured on a certificate must not exceed the limit set on its parents in the CA hierarchy.
+
+Value (integer) – [REQUIRED]
+
+A long integer interpreted according to the value of Type, below.
+
+Type (string) – [REQUIRED]
+
+Determines how Amazon Web Services Private CA interprets the Value parameter, an integer. Supported validity types include those listed below. Type definitions with values include a sample input value and the resulting output.
+
+END_DATE: The specific date and time when the certificate will expire, expressed using UTCTime (YYMMDDHHMMSS) or GeneralizedTime (YYYYMMDDHHMMSS) format. When UTCTime is used, if the year field (YY) is greater than or equal to 50, the year is interpreted as 19YY. If the year field is less than 50, the year is interpreted as 20YY.
+
+Sample input value: 491231235959 (UTCTime format)
+
+Output expiration date/time: 12/31/2049 23:59:59
+
+ABSOLUTE: The specific date and time when the validity of a certificate will start or expire, expressed in seconds since the Unix Epoch.
+
+Sample input value: 2524608000
+
+Output expiration date/time: 01/01/2050 00:00:00
+
+DAYS, MONTHS, YEARS: The relative time from the moment of issuance until the certificate will expire, expressed in days, months, or years.
+
+Example if DAYS, issued on 10/12/2020 at 12:34:54 UTC:
+
+Sample input value: 90
+
+Output expiration date: 01/10/2020 12:34:54 UTC
+
+The minimum validity duration for a certificate using relative time ( DAYS) is one day. The minimum validity for a certificate using absolute time ( ABSOLUTE or END_DATE) is one second.
+
+ValidityNotBefore (dict) –
+
+Information describing the start of the validity period of the certificate. This parameter sets the “Not Before” date for the certificate.
+
+By default, when issuing a certificate, Amazon Web Services Private CA sets the “Not Before” date to the issuance time minus 60 minutes. This compensates for clock inconsistencies across computer systems. The ValidityNotBefore parameter can be used to customize the “Not Before” value.
+
+Unlike the Validity parameter, the ValidityNotBefore parameter is optional.
+
+The ValidityNotBefore value is expressed as an explicit date and time, using the Validity type value ABSOLUTE. For more information, see Validity in this API reference and Validity in RFC 5280.
+
+Value (integer) – [REQUIRED]
+
+A long integer interpreted according to the value of Type, below.
+
+Type (string) – [REQUIRED]
+
+Determines how Amazon Web Services Private CA interprets the Value parameter, an integer. Supported validity types include those listed below. Type definitions with values include a sample input value and the resulting output.
+
+END_DATE: The specific date and time when the certificate will expire, expressed using UTCTime (YYMMDDHHMMSS) or GeneralizedTime (YYYYMMDDHHMMSS) format. When UTCTime is used, if the year field (YY) is greater than or equal to 50, the year is interpreted as 19YY. If the year field is less than 50, the year is interpreted as 20YY.
+
+Sample input value: 491231235959 (UTCTime format)
+
+Output expiration date/time: 12/31/2049 23:59:59
+
+ABSOLUTE: The specific date and time when the validity of a certificate will start or expire, expressed in seconds since the Unix Epoch.
+
+Sample input value: 2524608000
+
+Output expiration date/time: 01/01/2050 00:00:00
+
+DAYS, MONTHS, YEARS: The relative time from the moment of issuance until the certificate will expire, expressed in days, months, or years.
+
+Example if DAYS, issued on 10/12/2020 at 12:34:54 UTC:
+
+Sample input value: 90
+
+Output expiration date: 01/10/2020 12:34:54 UTC
+
+The minimum validity duration for a certificate using relative time ( DAYS) is one day. The minimum validity for a certificate using absolute time ( ABSOLUTE or END_DATE) is one second.
+
+IdempotencyToken (string) – Alphanumeric string that can be used to distinguish between calls to the IssueCertificate action. Idempotency tokens for IssueCertificate time out after one minute. Therefore, if you call IssueCertificate multiple times with the same idempotency token within one minute, Amazon Web Services Private CA recognizes that you are requesting only one certificate and will issue only one. If you change the idempotency token for each call, Amazon Web Services Private CA recognizes that you are requesting multiple certificates.
+
+RETURN TYPE:
+dict
+
+RETURNS:
+Response Syntax
+{
+    'CertificateArn': 'string'
+}
+Response Structure
+(dict) –
+
+CertificateArn (string) –
+
+The Amazon Resource Name (ARN) of the issued certificate and the certificate serial number. This is of the form:
+
+arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012/certificate/286535153982981100925020015808220737245
+
+Exceptions
+ACMPCA.Client.exceptions.LimitExceededException
+
+ACMPCA.Client.exceptions.ResourceNotFoundException
+
+ACMPCA.Client.exceptions.InvalidStateException
+
+ACMPCA.Client.exceptions.InvalidArnException
+
+ACMPCA.Client.exceptions.InvalidArgsException
+
+ACMPCA.Client.exceptions.MalformedCSRException

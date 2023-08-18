@@ -1,2 +1,1 @@
-# compibot
-Company Chatbot
+Company Chatbot using Langchain, ChatGPT, Chroma DB, and Streamlit

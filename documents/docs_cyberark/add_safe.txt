@@ -1,0 +1,74 @@
+Add a Safe
+This topic describes the authorizations a user must have to add a Safe or view the Safes page, and how to add a Safe in the PVWA.
+
+Add Safe authorizations
+To add a Safe, users must have the following authorization in the Vault:
+
+Authorization
+
+Description
+
+Add Safes
+
+This authorization is given at the user level, as part of the PrivateArk User management.
+
+It enables the user to perform the following actions:
+
+Add Safes
+
+Rename a Safe
+
+Users who do not have the Add safes authorization can view the Safes page with one of the following authorizations:
+
+Authorization
+
+Description
+
+Manage safe
+
+Enables the user to view the safes page and manage the properties of existing safes.
+
+Manage safe Members
+
+Enables the user to view the safes page and manage safe members’ authorizations.
+
+Add a Safe
+ 	
+Safes that are created in the PVWA are based on default properties. For more information about the default Safe properties, see Default Safe properties.
+
+In the PVWA, click Policies > Safes.
+
+ 	
+The Safes that appear in the list are either Safes created by your user, or Safes for which you have one of the required permissions.
+
+Click Create Safe.
+
+The Add Safe page appears.
+
+Enter a name for the new Safe.
+
+(Optional) Enter a description.
+
+To set different permissions for individual accounts in the Safe, select Enable Object Level Access Control. For more information, see Use Object Level Access Control in Safes.
+
+Select the account (password) version management for the Safe:
+
+Save the last <number> account versions – The number of previous password versions that you want to save for each account. These versions are stored in the Safe indefinitely. A new version replaces the oldest version.
+
+Save account versions from the last <number> days – The number of days that password versions are saved in the Safe.
+
+You can view saved password versions in the Account Details page, in the Versions tab. By default, the last five password versions are stored. For more information, see Passwords.
+
+In the Assigned to CPM drop-down list, select the relevant CPM.
+
+Click Save.
+
+The Safe is created in the Vault, and the Safe Details page appears.
+
+ 	
+Reports Safes and PSM Recording Safes are created automatically with the Auto-purge is enabled setting, which means that files in these Safes will automatically be purged after the Object History Retention Period defined in the Safe properties. 
+In addition, these Safes cannot be managed by the CPM.
+
+The Members tab contains the Safe members and their authorizations in the Safe. By default, all predefined users and groups are hidden. To display them, clear the Hide predefined users and groups check box.
+
+For more information about Safe members and their authorizations, see Add a Safe member.

@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "compibot"
+version = "1.0.0"
+description = "Compibot - The company chatbot "
+authors = ["Nir Bar"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+openai = "*"
+streamlit = "*"
+streamlit_chat = "*"
+langchain = "*"
+chromadb = "*"
+tiktoken = "*"
+google-search-results = "*"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

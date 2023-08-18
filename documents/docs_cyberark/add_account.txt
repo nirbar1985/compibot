@@ -1,0 +1,559 @@
+Add account
+This method adds a new privileged account or SSH key to the Vault.
+
+Make sure there are no spaces in the URL.
+
+The following characters are not supported in URL values: + & %
+
+If the URL includes a dot (.), add a forward slash (/) at the end of the URL. For example: api/Safes/MySafe/Members/user@cyber.com/
+
+Select the method you want to use:
+
+2nd gen API (recommended)
+To run this web service, you must have the following permission in the Vault:
+
+Add account
+
+Update password or Update password properties
+
+ 	
+You require an additional license to add SSH keys to the Vault. For more information, contact your CyberArk representative.
+
+URL
+ 
+
+https://<IIS_Server_Ip>/PasswordVault/API/Accounts/
+Resource information
+HTTP method
+
+POST
+
+Content type
+
+application/json
+
+Header parameter
+Parameter
+
+Description
+
+Authorization
+
+The token that identifies the session, encoded in BASE 64. See Authentication.
+
+Type: String
+
+Mandatory: Yes
+
+Default value: None
+
+Body parameters
+ 	
+{
+  "name": "string",
+  "address": "string",
+  "userName": "string",
+  "platformId": "string",
+  "safeName": "string",
+  "secretType": "key",
+  "secret": "string",
+  "platformAccountProperties": {},
+  "secretManagement": {
+    "automaticManagementEnabled": true,
+    "manualManagementReason": "string"
+  },
+  "remoteMachinesAccess": {
+    "remoteMachines": "string",
+    "accessRestrictedToRemoteMachines": true
+  }
+}
+ 
+
+Parameter
+
+Name
+Type
+
+string
+Description
+
+The name of the account.
+
+Valid values
+
+Account name
+Parameter
+
+address
+
+Type
+
+String
+
+Description
+
+The name or address of the machine where the account will be used.
+
+Valid values
+
+vDNS/IP/URL where the account is managed
+
+Parameter
+
+userName
+Type
+
+String
+Description
+
+Account user's name.
+
+Valid values
+
+User name
+Parameter
+
+platformId (required)
+Type
+
+string
+Description
+
+The platform assigned to this account.
+
+Valid values
+
+Valid platform IDs, example: WinServerLocal
+Parameter
+
+SafeName (required)
+Type
+
+String
+Description
+
+The Safe where the account will be created.
+
+Valid values
+
+Safe name
+Parameter
+
+secret
+Type
+
+string
+Description
+
+The password value. This will not be returned in the API output.
+
+Valid values
+
+password or private SSH key
+Parameter
+
+secretType
+Type
+
+string
+Description
+
+The type of password.
+
+Valid values
+
+password, key
+Parameter
+
+userName
+Type
+
+string
+Description
+
+Account user's name.
+
+Valid values
+
+User name
+Parameter
+
+platformAccountProperties
+Type
+
+string
+Description
+
+Object containing key-value pairs to associate with the account, as defined by the account platform. These properties are validated against the mandatory and optional properties of the specified platform's definition. Optional properties that do not exist on the account will not be returned here. Internal properties are not returned.
+
+Valid values
+
+example: {"Location": "IT", "OwnerName": "MSSPAdmin"}
+secretManagement
+
+Parameter
+
+automaticManagementEnabled
+Type
+
+Boolean
+Description
+
+Whether the account secret is automatically managed by the CPM.
+
+Default
+
+true
+
+Valid values
+
+true, false
+Parameter
+
+manualManagementReason
+Type
+
+string
+Description
+
+Reason for disabling automatic secret management.
+
+Valid values
+
+Reason.
+Parameter
+
+status
+Type
+
+string
+Description
+
+Account management status.
+
+Valid values
+
+inProcess, succeeded, failed, partiallySucceeded
+Parameter
+
+lastModifiedDateTime
+Type
+
+string
+Description
+
+Last modified date of the account.
+
+Valid values
+
+date-time
+Parameter
+
+lastReconciledDateTime
+Type
+
+string
+Description
+
+Last reconciled date of the account.
+
+Valid values
+
+date-time
+Parameter
+
+lastVerifiedDateTime
+Type
+
+string
+Description
+
+Last verified date of the account.
+
+Valid values
+
+date-time
+remoteMachinesAccess
+
+Parameter
+
+remoteMachines
+Type
+
+string
+Description
+
+List of remote machines, separated by semicolons.
+Example: server1.cyberark.com;server2.cyberark.com
+
+Valid values
+
+List of machines.
+Parameter
+
+accessRestrictedToRemoteMachines
+Type
+
+Boolean
+Description
+
+Whether or not to restrict access only to specified remote machines
+
+Valid values
+
+true, false
+Result
+ 	
+{
+  "name": "string",
+  "address": "string",
+  "userName": "string",
+  "platformId": "string",
+  "safeName": "string",
+  "secretType": "key",
+  "secret": "string",
+  "platformAccountProperties": {},
+  "secretManagement": {
+    "automaticManagementEnabled": true,
+    "manualManagementReason": "string"
+  },
+  "remoteMachinesAccess": {
+    "remoteMachines": "string",
+    "accessRestrictedToRemoteMachines": true
+  }
+}
+ 
+
+Parameter
+
+id
+Type
+
+string
+Description
+
+The ID of the account.
+
+Valid values
+
+Valid account ID
+Parameter
+
+safeName
+Type
+
+string
+Description
+
+The Safe where the account is created.
+
+Valid values
+
+Safe name
+Parameter
+
+platformId
+Type
+
+string
+Description
+
+The platform assigned to this account.
+
+Valid values
+
+Valid platform IDs, example: WinServerLocal
+Parameter
+
+address
+Type
+
+string
+Description
+
+The name or address of the machine where the account will be used.
+
+Valid values
+
+vDNS/IP/URL where the account is managed
+Parameter
+
+name
+Type
+
+string
+Description
+
+The name of the account.
+
+Valid values
+
+Account name
+Parameter
+
+secretType
+Type
+
+string
+Description
+
+The type of password.
+
+Valid values
+
+password, key
+Parameter
+
+userName
+Type
+
+string
+Description
+
+Account user's name.
+
+Valid values
+
+User name
+Parameter
+
+platformAccountProperties
+Type
+
+string
+Description
+
+Object containing key-value pairs to associate with the account, as defined by the account platform. Optional properties that do not exist on the account will not be returned here. Internal properties are not returned.
+
+Valid values
+
+example: {"Location": "IT", "OwnerName": "MSSPAdmin"}
+secretManagement
+
+Parameter
+
+automaticManagementEnabled
+Type
+
+Boolean
+Description
+
+Whether the account secret is automatically managed by the CPM.
+
+Default
+
+true
+
+Valid values
+
+true, false
+Parameter
+
+manualManagementReason
+Type
+
+string
+Description
+
+Reason for disabling automatic secret management.
+
+Valid values
+
+Reason.
+Parameter
+
+status
+Type
+
+string
+Description
+
+Account management status.
+
+Valid values
+
+inProcess, succeeded, failed, partiallySucceeded
+Parameter
+
+lastModifiedDateTime
+Type
+
+string
+Description
+
+Last modified date of the account.
+
+Valid values
+
+date-time
+Parameter
+
+lastReconciledDateTime
+Type
+
+string
+Description
+
+Last reconciled date of the account.
+
+Valid values
+
+date-time
+Parameter
+
+lastVerifiedDateTime
+Type
+
+string
+Description
+
+Last verified date of the account.
+
+Valid values
+
+date-time
+remoteMachinesAccess
+
+Parameter
+
+remoteMachines
+Type
+
+string
+Description
+
+List of remote machines, separated by semicolons.
+Example: server1.cyberark.com;server2.cyberark.com
+
+Valid values
+
+List of machines.
+Parameter
+
+accessRestrictedToRemoteMachines
+Type
+
+Boolean
+Description
+
+Whether or not to restrict access only to specified remote machines
+
+Valid values
+
+true, false
+Parameter
+
+createdDateTime
+Type
+
+string
+Description
+
+Date and time account was created.
+
+Valid values
+
+date-time
+1st gen API
+Return codes
+For a complete list of return codes, see Return Codes.
