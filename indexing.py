@@ -12,18 +12,16 @@ from constants import PERSIST_DIRECTORY_BOTO3_DB, PERSIST_DIRECTORY_COMPANY_DB, 
 load_dotenv('.env')
 
 DOCUMENT_MAP = {
-    ".txt": TextLoader,
-    ".md": TextLoader,
-    ".py": TextLoader,
-    ".pdf": PDFMinerLoader,
-    ".csv": CSVLoader,
-    ".xls": UnstructuredExcelLoader,
-    ".xlsx": UnstructuredExcelLoader,
-    ".docx": Docx2txtLoader,
-    ".doc": Docx2txtLoader,
+    '.txt': TextLoader,
+    '.md': TextLoader,
+    '.py': TextLoader,
+    '.pdf': PDFMinerLoader,
+    '.csv': CSVLoader,
+    '.xls': UnstructuredExcelLoader,
+    '.xlsx': UnstructuredExcelLoader,
+    '.docx': Docx2txtLoader,
+    '.doc': Docx2txtLoader,
 }
-
-# directory='docs'
 
 
 def load_docs(source_directory):
@@ -58,7 +56,11 @@ def process_docs_and_persist(source_directory, persist_directory):
     chunks = split_docs(documents)
     print(f'Number of chunks are [{len(chunks)}]')
 
-    vectordb = Chroma.from_documents(chunks, embedding=OpenAIEmbeddings(), persist_directory=persist_directory)
+    vectordb = Chroma.from_documents(
+        chunks,
+        embedding=OpenAIEmbeddings(),
+        persist_directory=persist_directory,
+    )
     vectordb.persist()
 
 
@@ -76,5 +78,5 @@ def main():
     )
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

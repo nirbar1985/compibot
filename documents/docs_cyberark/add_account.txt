@@ -16,11 +16,11 @@ Add account
 
 Update password or Update password properties
 
- 	
+
 You require an additional license to add SSH keys to the Vault. For more information, contact your CyberArk representative.
 
 URL
- 
+
 
 https://<IIS_Server_Ip>/PasswordVault/API/Accounts/
 Resource information
@@ -48,7 +48,7 @@ Mandatory: Yes
 Default value: None
 
 Body parameters
- 	
+
 {
   "name": "string",
   "address": "string",
@@ -67,7 +67,7 @@ Body parameters
     "accessRestrictedToRemoteMachines": true
   }
 }
- 
+
 
 Parameter
 
@@ -303,7 +303,7 @@ Valid values
 
 true, false
 Result
- 	
+
 {
   "name": "string",
   "address": "string",
@@ -322,7 +322,7 @@ Result
     "accessRestrictedToRemoteMachines": true
   }
 }
- 
+
 
 Parameter
 

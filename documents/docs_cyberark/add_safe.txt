@@ -33,12 +33,12 @@ Manage safe Members
 Enables the user to view the safes page and manage safe members’ authorizations.
 
 Add a Safe
- 	
+
 Safes that are created in the PVWA are based on default properties. For more information about the default Safe properties, see Default Safe properties.
 
 In the PVWA, click Policies > Safes.
 
- 	
+
 The Safes that appear in the list are either Safes created by your user, or Safes for which you have one of the required permissions.
 
 Click Create Safe.
@@ -65,8 +65,8 @@ Click Save.
 
 The Safe is created in the Vault, and the Safe Details page appears.
 
- 	
-Reports Safes and PSM Recording Safes are created automatically with the Auto-purge is enabled setting, which means that files in these Safes will automatically be purged after the Object History Retention Period defined in the Safe properties. 
+
+Reports Safes and PSM Recording Safes are created automatically with the Auto-purge is enabled setting, which means that files in these Safes will automatically be purged after the Object History Retention Period defined in the Safe properties.
 In addition, these Safes cannot be managed by the CPM.
 
 The Members tab contains the Safe members and their authorizations in the Safe. By default, all predefined users and groups are hidden. To display them, clear the Hide predefined users and groups check box.
