@@ -1,4 +1,4 @@
-# Compibot - The Company Chatbot using Langchain, ChatGPT, Chroma DB, and Streamlit
+# Compibot - The Company Chatbot powered by Langchain, ChatGPT, Chroma DB, and Streamlit
 
 
 ## Motivation
