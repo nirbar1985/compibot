@@ -1,4 +1,4 @@
-# Compibot - The Company Chatbot using Langchain, ChatGPT, Chroma DB, and Streamlit
+# Compibot - Company Chatbot powered by Langchain Agents, ChatGPT, Chroma DB, and Streamlit
 
 
 ## Motivation
@@ -13,7 +13,11 @@ Place your files of any format into the designated folder. Once there, the data 
 The chatbot's capabilities are backed by an agent that utilizes several tools:
 
 1. Company DB: Enables question-answering derived from the company's database embeddings.
-1. Boto3 DB: Designed for question-answering using the provided Boto3 documentation, but can be adapted for other data sources.
+1. Boto3 DB: Designed for question-answering using the provided Boto3 documentation
+
+   The following methods are supported -
+   - using documents loader - processes the provided documents
+   - using scraping loader - scrapes all the relevant html pages of a specific boto3 service and loads them to a vector DB
 1. Google Search Tool: Useful for fetching information from the web.
 
 
@@ -39,11 +43,17 @@ Clone the repository, set up the virtual environment, and install the required p
 
 ## Index your documents
 - Place the company documentation files into the designated directory inside documents directory
-- Place the boto3 documentation files into the docs_boto3 directory inside documents directory
+- Using Boto3 Documents loader - place the boto3 documentation files into the docs_boto3 directory inside documents directory
 - run once the indexing script: 
     ```
-    python indexing.py
+    python indexing.py --process-boto3-docs --boto3-loader documents_loader
     ```
+- Using Boto3 Scraping loader - run once the indexing script using this format:
+    ```
+    python indexing.py --process-boto3-docs --boto3-loader scraping_loader --boto3-service-name rolesanywhere
+    ```
+  After runing this script, all the relevant html pages regarding the APIs of a specific boto3 service (in this example rolesanywhere service) were scraped and loaded into a vector DB
+    
 - The vector database is now stored persistently in the "db" directory.
 
 
@@ -69,7 +79,7 @@ https://github.com/langchain-ai/langchain/blob/master/libs/langchain/langchain/a
 ## Start chatting
 Kick of the chatbot by running:
 ```
-streamlit run chatbot.py
+streamlit run chatbot_ui.py
 ```
 ## Contributing
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are greatly appreciated.
@@ -83,5 +93,5 @@ Push to the Branch (git push origin feature/AmazingFeature)
 Open a Pull Request
 (back to top)
 
-License
+## License
 Distributed under the MIT License. See LICENSE.txt for more information.
