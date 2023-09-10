@@ -26,6 +26,12 @@ Clone the repository, set up the virtual environment, and install the required p
 
 1. git clone git@github.com:nirbar1985/compibot.git
 
+1. ( In case you have python version 3.11.4 installed in pyenv)
+   ```shell script
+   pyenv local 3.11.4
+   ```
+
+
 1. Install dependencies
     ```shell script
     poetry install
