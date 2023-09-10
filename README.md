@@ -37,6 +37,7 @@ Clone the repository, set up the virtual environment, and install the required p
     ```
 
 ## Store your API keys
+- Create .env file
 - Place your OPENAI_API_KEY into .env file
 - Place your SERPAPI_API_KEY into .env file
 
