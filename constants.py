@@ -1,6 +1,6 @@
 from typing import Final
 
-COMPANY_NAME: Final[str] = 'cyberark'
+COMPANY_NAME: Final[str] = 'company_name'
 BOTO3: Final[str] = 'boto3'
 DOCUMENTS_FOLDER: Final[str] = 'documents'
 DB_FOLDER: Final[str] = 'db'

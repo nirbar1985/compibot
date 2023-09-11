@@ -26,16 +26,16 @@ def create_agent():
     )
 
     # load from disk
-    vectordb_cyberark = Chroma(
+    vectordb_company = Chroma(
         persist_directory=PERSIST_DIRECTORY_COMPANY_DB,
         embedding_function=OpenAIEmbeddings(),
     )
 
     # retrieval qa chain
-    qa_cyberark = RetrievalQA.from_chain_type(
+    qa_company = RetrievalQA.from_chain_type(
         llm=llm,
         chain_type='stuff',
-        retriever=vectordb_cyberark.as_retriever(search_kwargs={'k': 4}),
+        retriever=vectordb_company.as_retriever(search_kwargs={'k': 4}),
     )
 
     # conversational memory
@@ -56,7 +56,7 @@ def create_agent():
         ),
         Tool(
             name=f'{COMPANY_NAME.capitalize()} Knowledge Base',
-            func=qa_cyberark.run,
+            func=qa_company.run,
             description=(f'useful for when you need to answer questions about '
                          f'{COMPANY_NAME.capitalize()} documentation. Input should be a fully formed question.'),
         ),
