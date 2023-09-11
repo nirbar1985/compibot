@@ -77,7 +77,10 @@ streamlit run chatbot_ui.py
 ```
 
 ## Troubleshooting 
-because a known bug in langchain output parser in some scenarios - 
+Because a known bug in langchain output parser in some scenarios - 
+sometimes when the output parser gets text with code snippet, you might get in the chatbot this exception - 
+raise OutputParserException(f"Could not parse LLM output: {text}") from e
+
 please paste the following temporarily fix:
 ```
 except Exception as e:
