@@ -22,6 +22,8 @@ The chatbot's capabilities are backed by an agent that utilizes several tools:
 
 
 ## Getting Started
+
+### Installation
 Clone the repository, set up the virtual environment, and install the required packages
 
 1. git clone git@github.com:nirbar1985/compibot.git
@@ -42,13 +44,18 @@ Clone the repository, set up the virtual environment, and install the required p
     poetry shell
     ```
 
-## Store your API keys
+### Store your API keys
 - Create .env file
 - Place your OPENAI_API_KEY into .env file
 - Place your SERPAPI_API_KEY into .env file
+- The format should be -
+  ```
+  OPENAI_API_KEY=
+  SERPAPI_API_KEY=
+   ```
 
 
-## Index your documents
+### Index your documents
 - Place the company documentation files into the designated directory inside documents directory
 - Using Boto3 Documents loader - place the boto3 documentation files into the docs_boto3 directory inside documents directory
 - run once the indexing script: 
@@ -63,7 +70,11 @@ Clone the repository, set up the virtual environment, and install the required p
     
 - The vector database is now stored persistently in the "db" directory.
 
-
+### Start chatting
+Kick of the chatbot by running:
+```
+streamlit run chatbot_ui.py
+```
 
 ## Troubleshooting 
 because a known bug in langchain output parser in some scenarios - 
@@ -83,11 +94,7 @@ except Exception as e:
 
 in this location - 
 https://github.com/langchain-ai/langchain/blob/master/libs/langchain/langchain/agents/conversational_chat/output_parser.py#L50
-## Start chatting
-Kick of the chatbot by running:
-```
-streamlit run chatbot_ui.py
-```
+
 ## Contributing
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are greatly appreciated.
 
